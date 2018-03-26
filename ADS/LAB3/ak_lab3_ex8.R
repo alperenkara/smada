@@ -1,4 +1,5 @@
-#Alperen KARA 2018 Advanced Statistics
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #8.1 create matrix with 30 rows and 30 columns from vector of odd numbers
 m1 <- matrix(2^(1:900), nrow=30, ncol=30)
 

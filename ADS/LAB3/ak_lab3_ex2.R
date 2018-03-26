@@ -1,3 +1,5 @@
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #2.1
 #assign value of 1 to all elements
 m <- matrix(1, nrow = 50, ncol = 50)

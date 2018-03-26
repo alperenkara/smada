@@ -1,4 +1,5 @@
-#alperen kara
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #creating matrix 100x100 with natural numbers
 #m = matrix(c(1:10000), nrow=100, ncol=100)
 #1:dim(m)[2]

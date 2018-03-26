@@ -1,4 +1,4 @@
-#Alperen KARA 2018 Advanced Statistics
+##Alperen KARA 2018 Advanced Statistics LAB3
 
 #9.1 Create a sum function that takes any number of arguments 
 #9.1 (including numeric ortext arguments).

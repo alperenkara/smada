@@ -1,3 +1,5 @@
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #3.1 create matrix of 25 columns adn 50 rows 
 #start at 1 with natural numbers
 

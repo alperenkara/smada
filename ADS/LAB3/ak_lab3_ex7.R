@@ -1,4 +1,5 @@
-#Alperen KARA 2018 Advanced Statistics
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #7.1 create matrix with 60 rows and 30 columns from vector of odd numbers
 m1 <- matrix(seq(5,3600,5), nrow=60, ncol=60)
 

@@ -1,3 +1,5 @@
+##Alperen KARA 2018 Advanced Statistics LAB3
+
 #5.1 create matrix with 60 rows and 30 columns from vector of even numbers
 m1 <- matrix(seq(2,1800,2), nrow=60, ncol=30)
 
