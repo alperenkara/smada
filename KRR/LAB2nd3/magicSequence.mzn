@@ -19,7 +19,11 @@ array[range] of var range:magic;
 % - sum(array) return sum of the array's elements 
 % - you can use bool's like integers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+constraint forall(i in range)(
+  magic[i] = sum([bool2int(i == magic[j]) | j in range])
+);
 constraint forall([magic[i] == count(magic, i) | i in 0..n-1]);
+
 solve satisfy;
 %%%%%%%%%%%%%%%%%%%%%%%%
 % EXAMPLE OUTPUT  

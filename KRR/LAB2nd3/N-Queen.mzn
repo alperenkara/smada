@@ -8,6 +8,7 @@
 int: N;
 %int: rows;
 array [1..N] of var 1..N: q; % queen is column i is in row q[i]
+array [1..N] of var 1..N: c;
 %%%%%%%%%%%%%
 % CONSTRAINTS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -21,12 +22,18 @@ array [1..N] of var 1..N: q; % queen is column i is in row q[i]
 constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]);
 constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]+j-i);
 constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]-(j-i));      
+
+constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]);
+constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]+i-j);
+constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]-(i-j)); 
+
+constraınt ınverse()
 solve satisfy; 
   
 %%%%%%%%%%%%%%%%%%%
 % OUTPUT EXAMPLE  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% - rows[i] - queen's position in the ith row 
+% - rows[i] - queen's position in the ith row   
 % - N - number of queens                     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 output [ if fix(q[j]) == i then "Q" else "." endif ++
