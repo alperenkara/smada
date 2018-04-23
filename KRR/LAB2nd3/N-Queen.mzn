@@ -27,7 +27,7 @@ constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]);
 constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]+i-j);
 constraint forall (i in 1..N, j in i+1..N) (c[j] != c[i]-(i-j)); 
 
-constraınt ınverse()
+constraint inverse()
 solve satisfy; 
   
 %%%%%%%%%%%%%%%%%%%
