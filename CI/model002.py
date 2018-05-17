@@ -9,11 +9,7 @@ weights = {
     'output':np.array([2,-1]),
 }
 
-weights = {
-    'node_0':np.array([3,3]),
-    'node_1':np.array([-1,1]),
-    'output':np.array([2,-1]),
-}
+
 #node0 weights : 3,3 ; 
 node_0_input = (input_data * weights['node_0']).sum()
 
