@@ -60,3 +60,37 @@ lab.boot<-function(lab10dataset,indices)
 lab.median<-boot(lab10dataset$V1,lab.boot,R=10000)
 #EXercises 7
 
+str(lab.median)
+hist(lab.median$t)
+abline(v=median(lab10dataset$V1))
+abline(v=quantile(output,c(0.025,0.975)),col="green")
+
+#EX 8:
+
+var.boot<-function(lab10dataset,indices)
+{
+  return(var(lab10dataset[indices]))
+}
+
+library(e1071)
+kurt.boot<-function(lab10dataset,indices)
+{
+  return(kurtosis(lab10dataset[indices]))
+}
+
+max.boot<-function(lab10dataset,indices)
+{
+  return(max(lab10dataset[indices]))
+}
+
+min.boot<-function(lab10dataset,indices)
+{
+  return(min(lab10dataset[indices]))
+}
+
+#Ex 9 
+
+boot.variance<-boot(lab10dataset$V1,var.boot,R=10000)
+hist(boot.variance$t)
+abline(v=var(lab10dataset$V1))
+abline(v=quantile(boot.variance$t,c(0.025,0.975)),col="red")
