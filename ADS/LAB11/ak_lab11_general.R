@@ -1,4 +1,5 @@
 #Advanced Statistics Lab11 2018
+#General Task
 #Linear Regression 
 #Alperen KARA
 
@@ -59,4 +60,19 @@ for(i in 0:10) {
 }
 #a : 0.7226706
 
+model <- lm(y ~ x)
+model$coefficients["x"]
+#        x 
+#0.7226706
 
+model$coefficients["x"] - a # -1.985453e-09
+
+plot(y~x)
+abline(0,a, col="red", lwd=7)
+abline(model, col="blue", lwd=3)
+
+
+plot(data$PM25~data$PM10)
+abline(ymean-a*xmean,a, col="red", lwd=5)
+model <- lm(data$PM25 ~ data$PM10)
+abline(model, col="white")
