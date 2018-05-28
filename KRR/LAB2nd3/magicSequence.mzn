@@ -21,6 +21,7 @@ array[range] of var range:magic;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 constraint forall(i in range)(
   magic[i] = sum([bool2int(i == magic[j]) | j in range])
+
 );
 constraint forall([magic[i] == count(magic, i) | i in 0..n-1]);
 

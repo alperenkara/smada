@@ -8,6 +8,8 @@
 int: N;
 %int: rows;
 array [1..N] of var 1..N: q; % queen is column i is in row q[i]
+%
+%
 % array [1..N] of var 1..N: c;
 %%%%%%%%%%%%%
 % CONSTRAINTS 
@@ -24,12 +26,16 @@ array [1..N] of var 1..N: q; % queen is column i is in row q[i]
 % int_search(q, first_fail, indomain_min, complete);
 % int_search(q, first_fail, indomain_median, complete);
 
-constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]);
-constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]+j-i);
-constraint forall (i in 1..N, j in i+1..N) (q[i] != q[j]-(j-i));      
+constraint forall (i in 1..N, j in i+1..N) 
+%N equal to 5 therefore i=[1,2,3,4,5] j=[2,3,4,5]
+(q[i] != q[j]);
+constraint forall (i in 1..N, j in i+1..N) 
+(q[i] != q[j]+j-i);
+constraint forall (i in 1..N, j in i+1..N) 
+(q[i] != q[j]-(j-i));      
 
 %solve satisfy; 
-solve :: int_search(q, first_fail, indomain_median, complete) satisfy;
+solve :: int_search(q, first_fail, indomain_max, complete) satisfy;
 
 %%%%%%%%%%%%%%%%%%%
 % OUTPUT EXAMPLE  
