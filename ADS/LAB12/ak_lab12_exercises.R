@@ -76,3 +76,23 @@ plot(fit_linear_model)
 #7 
 
 second_fit_linear_model <- lm(log(medv) ~ crim + rm + tax + lstat, data = train)
+############################################
+#8 Examine the diagnotics for the model 
+second_linear_model_rsquared <- summary(second_fit_linear_model)$r.squared
+round(second_linear_model_rsquared, 3)
+#0.735
+######################################
+#9Create a data frame of your predicted
+
+predicted <- predict(second_fit_linear_model, newdata = test)
+results <- data.frame(predicted = exp(predicted), original = test$medv)
+
+####################################
+#10 Plot this to visualize the performance of your model 
+
+results %>%
+  ggplot(aes(x = predicted, y = original)) +
+  geom_point() +
+  stat_smooth() +
+  labs(x = "Predicted Values", y = "Original Values", title = "Predicted vs. Original Values") +
+  theme_minimal()
