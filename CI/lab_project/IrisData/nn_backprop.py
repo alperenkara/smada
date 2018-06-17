@@ -68,11 +68,11 @@ def showMatrixPartial(m, numRows, dec, indices):
 # -----
 	
 class NeuralNetwork:
-
+#this defination provides zero-array
   def __init__(self, numInput, numHidden, numOutput, seed):
-    self.ni = numInput
-    self.nh = numHidden
-    self.no = numOutput
+    self.ni = numInput #number of input layers
+    self.nh = numHidden #number of hidden layers
+    self.no = numOutput #number of output layers
 	
     self.iNodes = np.zeros(shape=[self.ni], dtype=np.float32)
     self.hNodes = np.zeros(shape=[self.nh], dtype=np.float32)
