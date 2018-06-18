@@ -18,8 +18,16 @@ meanOzone<-mean(na.omit(airquality[,1]))
 meanSolar<-mean(na.omit(airquality[,2]))
 meanWind<-mean(na.omit(airquality[,3]))
 #mean for every months
-
-
+for (x in 1:12) {
+print(mean(na.omit(airquality[x,1]))   )
+}
+for (x in 1:12) {
+  print(mean(na.omit(airquality[x,2]))   )
+}
+for (x in 1:12) {
+  print(mean(na.omit(airquality[x,3]))   )
+}
+meansMatrix <- matrix(nrow=5,ncol=4)
 #Question3 
 
 boxplot(airquality$Ozone)
@@ -54,10 +62,6 @@ summary(airquality$Wind)
 
 #Question6
 
-# data("diamonds")
-# ggplot(data=diamonds, aes(x = carat, y = color)) +
-#   geom_point(position='jitter',size=0.6,alpha=1/2) +
-#     ggtitle('Price (log10 by Carat)')
 
 relation_carat <- ggplot(data = diamonds, aes(x = color, y = carat))
 relation_carat + geom_jitter(alpha=0.1)
