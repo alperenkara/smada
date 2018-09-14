@@ -10,7 +10,8 @@ def load_data(rootpath="C:/Users/PLALKAR1/Documents/GTSRB_Final_Training_Images/
               feature=None, cut_roi=True,
               test_split=0.2, seed=113
               ):
-    
+    # there are 42 different subset 
+    # using subsets in which order
     classes = np.arange(0, 42, 2)
     
     X = []  
@@ -93,7 +94,8 @@ def _extract_feature(X, feature):
         X = np.array(X).astype(np.float32) / 255
         X = [x - np.mean(x) for x in X]
     X = [x.flatten() for x in X]
-    return X
+    return X\
+  # noise functions for the test accuracy with noisy 
 """
 def noisy(noise_type,image,gp1=0.9,spp=0.9,qup=0.9,b=2):
 
