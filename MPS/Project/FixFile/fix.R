@@ -1,6 +1,0 @@
-library(csdf)
-Sys.setenv(TZ='GMT')
-fpath <- system.file( "TOA5_E7331.Rad_dhm_2017_05_01_0100.dat", package="csdf")
-obj <- read.toa5("C:\\Users\\alper\\Documents\\GitHub\\smada\\ModellingPhysicalSystems\\Project\\FixFile\\TOA5_E7331.Rad_dhm_2017_05_01_0100.dat")
-summary(obj)
-write.csv(as.data.frame(obj), "C:\\Users\\alper\\Documents\\GitHub\\smada\\ModellingPhysicalSystems\\Project\\FixFile\\plain.csv")
