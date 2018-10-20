@@ -4,7 +4,7 @@ import math
 
 #drawing and the creation of the graph
 graph = nx.Graph()
-graph = nx.read_edgelist(r"C:/Users/Joanna-T470/PycharmProjects/dijkstra/graf.txt", delimiter=";", create_using=nx.DiGraph(), nodetype=int, data=(('weight',float),))
+graph = nx.read_edgelist(r'C:\\Users\\alper\\Documents\\GitHub\\smada\\SecondSEM\\DataStructures\\lab1\\graf.txt', delimiter=";", create_using=nx.DiGraph(), nodetype=int, data=(('weight',float),))
 edges = graph.edges()
 print(graph.edges())
 #[(1, 16), (1, 9), (1, 10), (1, 5), (1, 18), (1, 2), (16, 1), (16, 11), (16, 15), (16, 13), (8, 20), (8, 19), (8, 18), (8, 3), (8, 2), (8, 12), (8, 4), (8, 14), (20, 8), (20, 13), (20, 16), (20, 5), (20, 4), (20, 15), (20, 12), (17, 16), (17, 6), (17, 18), (10, 1), (10, 7), (10, 11), (10, 16), (10, 15), (10, 18), (6, 20), (6, 9), (6, 5), (6, 2), (15, 5), (15, 3), (15, 18), (5, 9), (5, 19), (5, 18), (5, 7), (5, 1), (5, 10), (5, 11), (13, 9), (13, 14), (13, 18), (13, 12), (13, 11), (13, 10), (13, 17), (9, 16), (9, 8), (9, 1), (9, 17), (9, 5), (19, 7), (19, 18), (19, 1), (19, 16), (19, 11), (19, 9), (19, 13), (19, 15), (7, 12), (7, 3), (7, 6), (18, 5), (18, 12), (18, 13), (14, 19), (14, 13), (14, 2), (14, 12), (14, 9), (14, 20), (14, 4), (4, 15), (4, 9), (4, 14), (4, 7), (12, 2), (12, 20), (12, 18), (12, 15), (12, 17), (3, 15), (3, 10), (3, 9), (3, 1), (3, 6), (2, 3), (2, 1), (11, 10), (11, 5), (11, 3)]
@@ -45,19 +45,3 @@ def Dijkstra(G, source):
         # 15          remove u from Q
         Q.remove(u)
 
-# 17          for each neighbor v of u:           // where v is still in Q.
-# 18              alt ← dist[u] + length(u, v)
-# 19              if alt < dist[v]:               // A shorter path to v has been found
-# 20                  dist[v] ← alt
-# 21                  prev[v] ← u
-# 22
-# 23      return dist[], prev[]
-#
-#
-# 1  S ← empty sequence
-# 2  u ← target
-# 3  if prev[u] is defined or u = source:          // Do something only if the vertex is reachable
-# 4      while u is defined:                       // Construct the shortest path with a stack S
-# 5          insert u at the beginning of S        // Push the vertex onto the stack
-# 6          u ← prev[u]                           // Traverse from target to source
-#
