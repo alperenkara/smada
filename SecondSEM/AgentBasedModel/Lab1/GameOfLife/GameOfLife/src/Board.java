@@ -4,20 +4,18 @@ import java.awt.Insets;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputListener;
 
-/**
- * Board with Points that may be expanded (with automatic change of cell
- * number) with mouse event listener
- */
-
 public class Board extends JComponent implements MouseInputListener, ComponentListener {
 	private static final long serialVersionUID = 1L;
 	private Point[][] points;
-	private int size = 14;
-
+	private int size = 10;
+	public int editType=0;
+	public int staticField = 10000;
+	
 	public Board(int length, int height) {
 		addMouseListener(this);
 		addComponentListener(this);
@@ -26,24 +24,25 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		setOpaque(true);
 	}
 
-	// single iteration
 	public void iteration() {
-		for (int x = 0; x < points.length; ++x)
-			for (int y = 0; y < points[x].length; ++y)
-				points[x][y].calculateNewState();
-
-		for (int x = 0; x < points.length; ++x)
-			for (int y = 0; y < points[x].length; ++y)
-				points[x][y].changeState();
+		for (int x = 1; x < points.length - 1; ++x)
+			for (int y = 1; y < points[x].length - 1; ++y)
+				points[x][y].move();
+		
+		
+        for (int x = 1; x < points.length - 1; ++x)
+            for (int y = 1; y < points[x].length - 1; ++y)
+                points[x][y].blocked = false;
+        
 		this.repaint();
 	}
 
-	// clearing board
 	public void clear() {
 		for (int x = 0; x < points.length; ++x)
 			for (int y = 0; y < points[x].length; ++y) {
-				points[x][y].setState(0);
+				points[x][y].clear();
 			}
+		calculateField();
 		this.repaint();
 	}
 
@@ -54,23 +53,45 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 			for (int y = 0; y < points[x].length; ++y)
 				points[x][y] = new Point();
 
-		for (int x = 0; x < points.length; ++x) {
-			for (int y = 0; y < points[x].length; ++y) {
-				//TODO: initialize the neighborhood of points[x][y] cell 
-		        tryToAdd(points[x][y],x-1,y+1); tryToAdd(points[x][y],x, y+1); tryToAdd(points[x][y],x+1,y+1);
-		        tryToAdd(points[x][y],x-1,y); /*                            */ tryToAdd(points[x][y], x+1, y);
-		        tryToAdd(points[x][y],x-1,y-1); tryToAdd(points[x][y],x, y-1); tryToAdd(points[x][y], x+1, y-1);
+		for (int x = 1; x < points.length-1; ++x) {
+			for (int y = 1; y < points[x].length-1; ++y) {	
+				points[x][y].neighbors.add(points[x-1][y]);
+				points[x][y].neighbors.add(points[x+1][y]);
+
+				points[x][y].neighbors.add(points[x+1][y+1]);
+				points[x][y].neighbors.add(points[x][y+1]);
+				points[x][y].neighbors.add(points[x-1][y+1]);
+
+				points[x][y].neighbors.add(points[x-1][y-1]);
+				points[x][y].neighbors.add(points[x][y-1]);
+				points[x][y].neighbors.add(points[x+1][y-1]);
 			}
-		}
+		}	
 	}
-	  private void tryToAdd(Point addTo, int x, int y){
-		    try{
-		    addTo.addNeighbor(points[x][y]);
-		    }catch(ArrayIndexOutOfBoundsException ignore){
-		      //ignore
-		    }
-		  }
-	//paint background and separators between cells
+	
+	private void calculateField(){
+		/*! Create list of points that need recalculation of its static field. Please note that initially the value of staticField is set to 100000.*/
+        ArrayList<Point> toCheck = new ArrayList<Point>();
+        for (int x = 0; x < points.length; ++x) {
+            for (int y = 0; y < points[x].length; ++y) {
+                Point p=points[x][y];
+                if (p.type==2){
+                    p.staticField=0;
+                    toCheck.addAll(p.neighbors);
+                    System.out.print("exit");
+                }
+            }
+        }
+        /*! controlling toCheck */
+        while ( toCheck.isEmpty()==false ){
+            Point first=toCheck.get(0);
+            if (first.calcStaticField()==true){
+                toCheck.addAll(first.neighbors);
+            }
+            toCheck.remove(0);
+        }
+	}
+
 	protected void paintComponent(Graphics g) {
 		if (isOpaque()) {
 			g.setColor(getBackground());
@@ -80,7 +101,6 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		drawNetting(g, size);
 	}
 
-	// draws the background netting
 	private void drawNetting(Graphics g, int gridSpace) {
 		Insets insets = getInsets();
 		int firstX = insets.left;
@@ -100,31 +120,26 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 			y += gridSpace;
 		}
 
-		for (x = 0; x < points.length; ++x) {
-			for (y = 0; y < points[x].length; ++y) {
-				if (points[x][y].getState() != 0) {
-					switch (points[x][y].getState()) {
-					case 1:
-						g.setColor(new Color(0x0000ff));
-						break;
-					case 2:
-						g.setColor(new Color(0x00ff00));
-						break;
-					case 3:
-						g.setColor(new Color(0xff0000));
-						break;						
-					case 4:
-						g.setColor(new Color(0x000000));
-						break;						
-					case 5:
-						g.setColor(new Color(0x444444));
-						break;						
-					case 6:
-						g.setColor(new Color(0xffffff));
-						break;						
+		for (x = 1; x < points.length-1; ++x) {
+			for (y = 1; y < points[x].length-1; ++y) {
+				if(points[x][y].type==0){
+					float staticField = points[x][y].staticField;
+					float intensity = staticField/100;
+					if (intensity > 1.0) {
+						intensity = 1.0f;
 					}
-					g.fillRect((x * size) + 1, (y * size) + 1, (size - 1), (size - 1));
+					g.setColor(new Color(intensity, intensity,intensity ));
 				}
+				else if (points[x][y].type==1){
+					g.setColor(new Color(1.0f, 0.0f, 0.0f, 0.7f));
+				}
+				else if (points[x][y].type==2){
+					g.setColor(new Color(0.0f, 1.0f, 0.0f, 0.7f));
+				}
+				if (points[x][y].isPedestrian){
+					g.setColor(new Color(0.0f, 0.0f, 1.0f, 0.7f));
+				}
+				g.fillRect((x * size) + 1, (y * size) + 1, (size - 1), (size - 1));
 			}
 		}
 
@@ -134,7 +149,12 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		int x = e.getX() / size;
 		int y = e.getY() / size;
 		if ((x < points.length) && (x > 0) && (y < points[x].length) && (y > 0)) {
-			points[x][y].clicked();
+			if(editType==3){
+				points[x][y].isPedestrian=true;
+			}
+			else{
+				points[x][y].type= editType;
+			}
 			this.repaint();
 		}
 	}
@@ -149,7 +169,12 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 		int x = e.getX() / size;
 		int y = e.getY() / size;
 		if ((x < points.length) && (x > 0) && (y < points[x].length) && (y > 0)) {
-			points[x][y].setState(1);
+			if(editType==3){
+				points[x][y].isPedestrian=true;
+			}
+			else{
+				points[x][y].type= editType;
+			}
 			this.repaint();
 		}
 	}

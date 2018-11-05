@@ -1,80 +1,93 @@
 import java.util.ArrayList;
 
 public class Point {
-	private ArrayList<Point> neighbors;
-	private int currentState;
-	private int nextState;
-	private int numStates = 6;
-	
-	private final int ALIVE = 1;
-	private final int DEAD  = 0;
 
-	private final int MIN_FRIENDS = 2;
-	private final int MAX_FRIENDS = 3;
-	  
+	public ArrayList<Point> neighbors;
+	public static Integer []types ={0,1,2,3};
+	public int type;
+	public int staticField;
+	public boolean isPedestrian;
+	boolean blocked = false;	
 	public Point() {
-		currentState = 0;
-		nextState = 0;
-		neighbors = new ArrayList<Point>();
-	}
-
-	public void clicked() {
-		currentState=(++currentState)%numStates;	
+		type=0;
+		staticField = 100000;
+		neighbors= new ArrayList<Point>();
 	}
 	
-	public int getState() {
-		return currentState;
+	public void clear() {
+		staticField = 100000;
+		
 	}
 
-	public void setState(int s) {
-		currentState = s;
-	}
+	public boolean calcStaticField() {
+		/*!
+		 *  Implement method calcStaticField(). 
+		 *  If this cell staticField is larger than smallest value of naighbours staticField +1, 
+		 *  set cell static field to this value. 
+		 *  Return true if you change the value of staticField, otherwise return false.
+		 *  */
+		 if (neighbors.size()>0) {
+             int min = neighbors.get(0).staticField;
+             for (Point p:neighbors) {
+                 if (p.staticField<min) {
+                     min=p.staticField;
+                 }
+             }
 
-	public void calculateNewState() {
-		//TODO: insert logic which updates according to currentState and 
-		//number of active neighbours
-	    if (getState() == ALIVE) {
-	        nextState = shouldThisDie() ? DEAD : ALIVE;
-	      } else {//(getState() == DEAD){
-	        nextState = shouldThisBeBorn() ? ALIVE : DEAD;
-	      }
-	}
+             if (staticField>min+1){
+                 staticField=min+1;
+                 return true;
+             }else{
+                 return false;
+             }
 
-	public void changeState() {
-		currentState = nextState;
+         }else {
+
+
+             return false;
+         }
 	}
 	
+	public void move(){
+		
+		/*! Check if there is a pedestrian in given cell:
+		isPedestrian == true 
+		*/	    
+		
+		if(type ==2){
+			/*! agents which are reach to exit should be removed */
+	        isPedestrian = false;
+	        return;
+        }
+		  /*! blocked == false*/ 
+		  if(isPedestrian == true && blocked == false){
+			  
+	            if(!neighbors.isEmpty()){
+	            	
+	                int min = neighbors.get(0).staticField;
+	                
+	                int min_id = 0;
+	                
+	                if(neighbors.size()>1){
+	                	
+	                    for(int i = 0; i<neighbors.size(); i++){
+	                    	
+	                        if(min > neighbors.get(i).staticField){
+	                        	
+	                            min_id = i;
+	                            
+	                            min = neighbors.get(i).staticField;
+	                        }
+	                    }
+	                }
+	                isPedestrian = false;
+	                neighbors.get(min_id).isPedestrian = true; /*! true */
+	                neighbors.get(min_id).blocked = true;
+	            }
+	        }
+	}
+
 	public void addNeighbor(Point nei) {
 		neighbors.add(nei);
 	}
-	
-	//TODO: write method counting all active neighbors of THIS point
-	private boolean shouldThisDie() {
-	    int aliveFriends = countAliveFriends();
-
-	    boolean shouldDie = aliveFriends > MAX_FRIENDS || aliveFriends < MIN_FRIENDS;
-	    System.out.println("alive friends: " + aliveFriends + "; " + (shouldDie ? "dying" : "living"));
-
-	    return shouldDie;
-	  }
-
-	  private boolean shouldThisBeBorn() {
-	    int aliveFriends = countAliveFriends();
-	    boolean shouldStart = aliveFriends == MAX_FRIENDS;
-	    System.out.println("alive friends: " + aliveFriends + "; " + (shouldStart ? "starting" : "still dead"));
-
-	    return shouldStart;
-	  }
-
-	  private int countAliveFriends() {
-	    int aliveFriends = 0;
-
-	    System.out.print("friends: " + neighbors.size() + "; ");
-	    for (Point neighbor : neighbors) {
-	      if (neighbor.getState() == 1) {
-	        ++aliveFriends;
-	      }
-	    }
-	    return aliveFriends;
-	  }
 }

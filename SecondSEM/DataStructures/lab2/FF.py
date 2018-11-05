@@ -1,27 +1,24 @@
 import networkx as nx
-#import matplotlib.pyplot as plt
 import math
-#import pylab
 from collections import defaultdict
 import scipy
 from scipy import sparse
 
-# drawing and the creation of the graph
+path = r"C:\Users\alper\Documents\GitHub\smada\SecondSEM\DataStructures\lab2\graf1.txt"
 graph = nx.DiGraph()
-graph = nx.read_edgelist(r"C:\Users\alper\Documents\GitHub\smada\SecondSEM\DataStructures\lab2\graf1.txt", delimiter="\t",
+graph = nx.read_edgelist(path, delimiter="\t",
                          create_using=nx.DiGraph(), nodetype=int, data=(('capacity', float), ))
 for i in graph.edges():
     graph[i[0]][i[1]]['flow'] = 0.00
-# print(graph.edges())
+
 adjacency = [(n, nbrdict) for n, nbrdict in graph.adjacency()]
-print("found cycles")
+print("Cycles")
 print(nx.find_cycle(graph))
 
-#graph = nx.adj_matrix(graph)
+
 A = nx.adj_matrix(graph)
 A = A.todense()
 adjacencySparse = A
-# Python program for implementation of Ford Fulkerson algorithm
 
 
 def ford_fulkerson(graph, source, sink, debug=None):
@@ -30,7 +27,7 @@ def ford_fulkerson(graph, source, sink, debug=None):
     path = nx.shortest_path(graph, source, sink)
 
     while path:
-        # search for path with flow reserve
+
         reserve = float(math.inf)
         print(path)
         for x in range(0, len(path)-1):
@@ -78,7 +75,6 @@ def depth_first_search(G, source, sink):
         if v == sink:
             break
 
-        # search the next neighbour
         while neighbours:
             u, e = neighbours.popitem()
             if u not in explored:
@@ -92,7 +88,7 @@ def depth_first_search(G, source, sink):
         capacity = e['capacity']
         flow = e['flow']
 
-        # increase or redirect flow at the edge
+        # edge
         if in_direction and flow < capacity:
             stack.append((u, capacity - flow, undirected[u]))
             explored.add(u)
@@ -100,7 +96,7 @@ def depth_first_search(G, source, sink):
             stack.append((u, flow, undirected[u]))
             explored.add(u)
 
-    # (source, sink) path and its flow reserve
+    # source and sink
     reserve = min((f for _, f, _ in stack[1:]), default=0)
     path = [v for v, _, _ in stack]
 
@@ -109,3 +105,15 @@ def depth_first_search(G, source, sink):
 
 f = ford_fulkerson(graph, 10, 60)
 print(f)
+
+#  flow from the source s=10 is reached.
+mmax = -1
+xx = None
+for x in graph.nodes():
+    y = ford_fulkerson(graph, 10, x)
+    if (mmax < y):
+        xx = x
+        print(y, "  ", xx)
+    mmax = max(y, mmax)
+
+print(mmax, "  ", xx)
