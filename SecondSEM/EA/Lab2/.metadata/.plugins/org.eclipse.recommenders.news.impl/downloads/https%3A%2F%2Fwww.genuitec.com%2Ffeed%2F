@@ -12,53 +12,21 @@
 	<atom:link href="https://www.genuitec.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.genuitec.com</link>
 	<description>The Cloud Control Company</description>
-	<lastBuildDate>Wed, 31 Oct 2018 02:28:03 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 07 Nov 2018 15:00:10 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>hourly</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=4.9.2</generator>
 	<item>
-		<title>Debug iOS &#038; Android in One Session: Get GapDebug Now</title>
-		<link>https://www.genuitec.com/debug-ios-android-in-one-session-get-gapdebug-now/</link>
-		<pubDate>Tue, 30 Oct 2018 15:35:54 +0000</pubDate>
-		<dc:creator><![CDATA[Wanda Muriy]]></dc:creator>
-				<category><![CDATA[GapDebug]]></category>
-		<category><![CDATA[General]]></category>
-		<category><![CDATA[Genuitec]]></category>
-		<category><![CDATA[Mobile]]></category>
-		<category><![CDATA[MyEclipse]]></category>
-		<category><![CDATA[Thought Leadership]]></category>
-		<category><![CDATA[Android]]></category>
-		<category><![CDATA[android debugger]]></category>
-		<category><![CDATA[android nexus]]></category>
-		<category><![CDATA[Apache Cordova]]></category>
-		<category><![CDATA[app store]]></category>
-		<category><![CDATA[apple]]></category>
-		<category><![CDATA[Application Development]]></category>
-		<category><![CDATA[debug PhoneGap]]></category>
-		<category><![CDATA[debug phonegap android]]></category>
-		<category><![CDATA[debug phonegap android eclipse]]></category>
-		<category><![CDATA[debug phonegap app in browser]]></category>
-		<category><![CDATA[debug PhoneGap build]]></category>
-		<category><![CDATA[debug phonegap client]]></category>
-		<category><![CDATA[debug phonegap javascript android]]></category>
-		<category><![CDATA[debug phonegap not working]]></category>
-		<category><![CDATA[debug PhoneGap xcode]]></category>
-		<category><![CDATA[debugging phonegap]]></category>
-		<category><![CDATA[google]]></category>
-		<category><![CDATA[google android]]></category>
-		<category><![CDATA[HTML5]]></category>
-		<category><![CDATA[iOS]]></category>
-		<category><![CDATA[iOS debugger]]></category>
-		<category><![CDATA[ipad]]></category>
-		<category><![CDATA[iPhone]]></category>
-		<category><![CDATA[ipod]]></category>
-		<category><![CDATA[PhoneGap]]></category>
-		<category><![CDATA[PhoneGap debugger]]></category>
+		<title>CodeMix &#8211; Better with You!</title>
+		<link>https://www.genuitec.com/codemix-better-with-you/</link>
+		<pubDate>Thu, 01 Nov 2018 21:16:18 +0000</pubDate>
+		<dc:creator><![CDATA[Brian Fernandes]]></dc:creator>
+				<category><![CDATA[Genuitec]]></category>
 
-		<guid isPermaLink="false">https://www.genuitec.com/?p=601520</guid>
-		<description><![CDATA[<p>Update: Development of GapDebug has been discontinued. Read the End of Life Notice for more information.Over the past 2 weeks our GapDebug tool for PhoneGap and Apache Cordova has garnered some incredible feedback. So far, over 280 users from the top tiers of the mobile development community have tested GapDebug. Now, we&#8217;re opening up the [&#8230;]</p>
-<p>The post <a rel="nofollow" href="https://www.genuitec.com/debug-ios-android-in-one-session-get-gapdebug-now/">Debug iOS &#038; Android in One Session: Get GapDebug Now</a> appeared first on <a rel="nofollow" href="https://www.genuitec.com">Genuitec</a>.</p>
+		<guid isPermaLink="false">https://www.genuitec.com/?p=601870</guid>
+		<description><![CDATA[<p>Thanks to detailed feedback from our awesome users, our team has been hard at work adding stability, reliability and performance fixes, and enhancements, to CodeMix. Read on for the deets on what’s new in CodeMix over the last month.Editing &#38; ValidationWhen editing TypeScript files, error markers were sometimes not cleared when the error was fixed [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://www.genuitec.com/codemix-better-with-you/">CodeMix &#8211; Better with You!</a> appeared first on <a rel="nofollow" href="https://www.genuitec.com">Genuitec</a>.</p>
 ]]></description>
 		</item>
 		<item>
@@ -354,5 +322,5 @@ Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/pro
 
 Content Delivery Network via resources.cloud.genuitec.com
 
-Served from: www.genuitec.com @ 2018-10-31 01:05:12 by W3 Total Cache
+Served from: www.genuitec.com @ 2018-11-07 12:07:05 by W3 Total Cache
 -->
