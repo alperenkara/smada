@@ -18,14 +18,11 @@ def getData(filePath):
             if solid != ""
         ]
     return solids
-
-
-# 2a
 exemplaryFaces = [
     Face(Point(1, 0, 0), Point(0, 1, 0), Point(0, 0, 0)),
     Face(Point(100, 0, 0.13), Point(0, 100, 0.13), Point(-100, -100, 0.13))
 ]
 
 solids = getData('solid_data.txt')
-print('Between faces (2a):', dist(exemplaryFaces[0], exemplaryFaces[1]))
+print('Between faces:', dist(exemplaryFaces[0], exemplaryFaces[1]))
 print('Between solids:', dist(solids[0], solids[1]))

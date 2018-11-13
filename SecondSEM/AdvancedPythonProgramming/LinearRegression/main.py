@@ -1,8 +1,3 @@
-# AGH University of Science and Technology 
-# EAIiIB Faculty, SMADA , Advanced Python Programming Course
-# Tutorial 
-# Alperen KARA, 12.11.18
-
 # Simple Linear Regression on the Swedish Insurance Dataset
 from random import seed
 from random import randrange
