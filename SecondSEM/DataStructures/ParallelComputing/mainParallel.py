@@ -1,10 +1,5 @@
-"""
-Python Parallel Processing (in 60 seconds or less)
-https://dbader.org/blog/python-parallel-computing-in-60-seconds
-"""
 import collections
 import multiprocessing
-
 
 Scientist = collections.namedtuple('Scientist', [
     'name',
@@ -27,7 +22,10 @@ def process_item(item):
         'age': 2017 - item.born
     }
 
-pool = multiprocessing.Pool()
-result = pool.map(process_item, scientists)
+def work():
+    pool = multiprocessing.Pool()
+    result = pool.map(process_item, scientists)
+    print(tuple(result))
 
-print(tuple(result))
+if __name__ == '__main__':
+       work()
