@@ -13,18 +13,15 @@ class Vehicle:
         self.isActive = True
         self.canPass = True
         self.value = value
-        self.bidAmount = value
         self.timeThroughIntersection = 0
         self.madeItThrough = False
-
-    def changeBid(self, newBidAmount):
-        self.bidAmount = newBidAmount
 
     def adjustSpeed(self, value):
         self.speed += value
 
     def adjustDistanceFromIntersection(self, timePassed):
         self.distanceFromIntersection -= (self.speed * timePassed)
+        # distance between intersections 100m
         if self.distanceFromIntersection < -100:
             self.isActive = False
 
@@ -35,7 +32,6 @@ class Vehicle:
 
     def printVehicleData(self):
         print("Vehicle " + str(self.idno) + " -")
-        print("Bid: " + str(self.bidAmount))
         print("Travel direction: " + str(self.travelDirection))
         print("Speed: " + str(self.speed))
         print("Distance from intersection: " +
@@ -44,26 +40,12 @@ class Vehicle:
         print("-----------------------")
 
 
-class Auctioneer:
-
-    def handleBids(self, activeVehicles):
-        return sorted(activeVehicles, key=lambda v: v.bidAmount, reverse=True)
-
-    def directTraffic(self, auctionResultList):
-        index = 0
-        for vehicle in auctionResultList:
-            # speed up vehicles based on auction standing
-            incrementor = (len(auctionResultList) - index - 1) * 0.1
-            vehicle.adjustSpeed(incrementor)
-            index += 1
-        self.avoidIntersectionCollisions(auctionResultList)
-        self.handlePassing(auctionResultList)
-
     # avoid collisions when two cars are approaching intersection at same time in different directions
     def avoidIntersectionCollisions(self, activeVehicles):
         for v1 in activeVehicles:
             for v2 in activeVehicles:
                 if v1 != v2:
+                    # math.fabs(x) return the absolute value of x.
                     if math.fabs(v1.distanceFromIntersection - v2.distanceFromIntersection) < 10:
                         if v1.distanceFromIntersection < 20 and v1.distanceFromIntersection > 0:
                             if oncomingDirections(v1.travelDirection, v2.travelDirection):
@@ -72,7 +54,7 @@ class Auctioneer:
                                     v1.printVehicleData()
                                     v2.printVehicleData()
                                     v1.adjustSpeed(10)
-
+"""
     # let vehicles traveling faster pass (assuming a second passing lane)
     def handlePassing(self, activeVehicles):
         for vehicle1 in activeVehicles:
@@ -93,7 +75,7 @@ class Auctioneer:
                                 speedDifference = vehicle1.speed - vehicle2.speed
                                 vehicle2.adjustSpeed(speedDifference)
 
-
+"""
 def oncomingDirections(d1, d2):
     if d1 == "N" and d2 == "E":
         return True
@@ -156,7 +138,7 @@ def main():
     # initialize a single vehicle with idno 0
     allVehicles = []
     allVehicles.append(Vehicle(0, 75))
-    a = Auctioneer()
+    # a = Auctioneer()
 
     print("Running sim...")
     # main simulation loop
@@ -169,15 +151,6 @@ def main():
             vehicle.checkIfThroughIntersection(t)
 
         allVehicles.append(Vehicle(t, randint(1, 100)))
-        allVehicles[0].changeBid(strategicBid(75.0, allVehicles))
-        for vehicle in allVehicles:
-            if vehicle.idno != 0:
-                vehicle.changeBid(strategicBid(vehicle.value, allVehicles))
-
-        bidList = a.handleBids(allVehicles)
-
-        winningBids.append(bidList[0].bidAmount)
-        a.directTraffic(bidList)
 
         runCollisionCheck(allVehicles)
 
@@ -194,6 +167,6 @@ def main():
           str(len(allVehicles)) + " vehicles spawned): " + str(len(allTimes)))
     print("Average time to get through intersection: " + str(avgTimeThru) + " sec")
 
-
+    
 if __name__ == '__main__':
     main()
