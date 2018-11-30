@@ -54,28 +54,7 @@ class Vehicle:
                                     v1.printVehicleData()
                                     v2.printVehicleData()
                                     v1.adjustSpeed(10)
-"""
-    # let vehicles traveling faster pass (assuming a second passing lane)
-    def handlePassing(self, activeVehicles):
-        for vehicle1 in activeVehicles:
-            for vehicle2 in activeVehicles:
-                if vehicle1 != vehicle2:
-                    if vehicle1.travelDirection == vehicle2.travelDirection:
-                        if math.fabs(vehicle1.distanceFromIntersection - vehicle2.distanceFromIntersection) < 10:
-                            if vehicle1.speed > vehicle2.speed and vehicle1.canPass == True:
-                                vehicle1.canPass = False
-                            elif vehicle1.speed < vehicle2.speed and vehicle2.canPass == True:
-                                vehicle2.canPass = False
-                            elif vehicle1.speed > vehicle2.speed and vehicle1.canPass == False and vehicle2.canPass == False:
-                                # slow down vehicle1 to match speed of vehicle2
-                                speedDifference = vehicle2.speed - vehicle1.speed
-                                vehicle1.adjustSpeed(speedDifference)
-                            elif vehicle1.speed < vehicle2.speed and vehicle2.canPass == False and vehicle1.canPass == False:
-                                # slow down vehicle2 to match speed of vehicle1
-                                speedDifference = vehicle1.speed - vehicle2.speed
-                                vehicle2.adjustSpeed(speedDifference)
 
-"""
 def oncomingDirections(d1, d2):
     if d1 == "N" and d2 == "E":
         return True
@@ -103,12 +82,6 @@ def printIntersectionData(time, allVehicles):
         vehicle.printVehicleData()
     print("~~~~~~~~~~~~~~~~~~~~~~~")
 
-
-def strategicBid(value, allVehicles):
-    bid = value * ((float)(len(allVehicles) - 1) / (float)(len(allVehicles)))
-    return bid
-
-
 def runCollisionCheck(allVehicles):
     # check for collision of vehicles travelling in the same direction
     for vehicle1 in allVehicles:
@@ -125,13 +98,8 @@ def runCollisionCheck(allVehicles):
 
 
 def main():
-    RUNTIME = 100
+    RUNTIME = 500
     TIMEINCREMENT = 1
-
-    winningBids = []
-    allBids = []
-    playerWins = 0
-    auctionsRun = 0
     percentiles = []
 
     t0 = time.time()
@@ -140,7 +108,7 @@ def main():
     allVehicles.append(Vehicle(0, 75))
     # a = Auctioneer()
 
-    print("Running sim...")
+    print("Running Simulation...")
     # main simulation loop
     t = 0
     #printIntersectionData(t, allVehicles)
@@ -155,7 +123,7 @@ def main():
         runCollisionCheck(allVehicles)
 
     tf = time.time()
-    print("Sim complete. Run time: " + str(tf - t0) + " sec")
+    print("Simulation complete. Run time: " + str(tf - t0) + " sec")
 
     allTimes = []
     for v in allVehicles:
