@@ -29,7 +29,7 @@ class Vehicle:
         if self.distanceFromIntersection <= 0 and self.madeItThrough == False:
             self.timeThroughIntersection = currentTime - self.idno
             self.madeItThrough = True
-
+    # useful info for the collision time
     def printVehicleData(self):
         print("Vehicle " + str(self.idno) + " -")
         print("Travel direction: " + str(self.travelDirection))
@@ -98,7 +98,7 @@ def runCollisionCheck(allVehicles):
 
 
 def main():
-    RUNTIME = 500
+    RUNTIME = 100
     TIMEINCREMENT = 1
     percentiles = []
 
